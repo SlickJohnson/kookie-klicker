@@ -5,7 +5,24 @@
     <title>Kookie Klicker</title>
   </head>
   <body>
-    <h1>0</h1>
-    <button>Make Kookies</button>
+    <h1 id="cookie-counter">0</h1>
+    <button id="cookie-clicker">Make kookies</button>
+    <script>
+      // Declare default variables.
+      let cookieCount = 0;
+      let clickPower = 1;
+
+      // Declare DOM variables.
+      let cookieCounter = document.getElementById('cookie-counter');
+      let cookieClicker = document.getElementById('cookie-clicker');
+
+      cookieCounter.innerHTML = cookieCount;
+
+      // Increment cookieCount by value of clickPower.
+      cookieClicker.addEventListener("click", function() {
+        cookieCount = cookieCount + clickPower;
+        cookieCounter.innerHTML = cookieCount;
+      })
+    </script>
   </body>
 </html>

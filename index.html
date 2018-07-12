@@ -10,7 +10,7 @@
     <hr>
     <h2>Shop</h2>
     <hr>
-    <p>Click Power</p>
+    <p>Klick Power</p>
     <p>Produces <span id="click-power-multiple">1</span> kookie(s) per klick</p>
     <button id="buy-click-power">Buy for <span id="click-power-price">50</span></button>
     <script>
@@ -33,8 +33,32 @@
       // Increment cookieCount by value of clickPower.
       cookieClicker.addEventListener("click", function() {
         cookieCount = cookieCount + clickPower;
-        cookieCounter.innerHTML = cookieCount;
+        refreshCookieCount()
       })
+      // Buy click power.
+      buyClickPower.addEventListener("click", function() {
+        if (cookieCount >= clickPowerPriceAmount) {
+            //subtract cookies from the price of the item
+            cookieCount -= clickPowerPriceAmount;
+            refreshCookieCount()
+
+            // Upgrade power level.
+            clickPowerLevelNumber += 1;
+
+            // Refresh shop item.
+            refreshPowerClick();
+        } else {
+          console.log("You don't have enough kookies!");
+        }
+      })
+
+      let refreshCookieCount = function() {
+        cookieCounter.innerHTML = cookieCount;
+      }
+
+      let refreshPowerClick = function() {
+        clickPowerLevel.innerHTML = clickPowerLevelNumber;
+      }
     </script>
   </body>
 </html>

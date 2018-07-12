@@ -45,6 +45,12 @@
             // Upgrade power level.
             clickPowerLevelNumber += 1;
 
+            // Update click price.
+            clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * 1.33);
+
+            // Update click power.
+            clickPower += 1;
+
             // Refresh shop item.
             refreshPowerClick();
         } else {
@@ -58,7 +64,9 @@
 
       let refreshPowerClick = function() {
         clickPowerLevel.innerHTML = clickPowerLevelNumber;
+        clickPowerPrice.innerHTML = clickPowerPriceAmount;
       }
+
     </script>
   </body>
 </html>

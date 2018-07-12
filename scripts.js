@@ -5,7 +5,7 @@
 ********************************/
 
 // Declare default variables.
-let cookieCount = 0;
+let cookieCount = 500;
 
 // Declare DOM variables.
 let cookieCounter = document.getElementById('cookie-counter');
@@ -73,6 +73,7 @@ let refreshPowerClick = function() {
 ********************************/
 
 // Set default values.
+let grandmaAuto = false;
 let grandmaPower = 50;
 let grandmaPriceAmount = 500;
 let grandmaLevelNumber = 0;
@@ -84,31 +85,41 @@ let grandmaLevel = document.getElementById('grandma-level');
 let grandmaMultiple = document.getElementById('grandma-multiple');
 
 // Buy a grandma.
-buyGrandma.addEventListener("click", function() {
-  // Make sure we have enough cookies and subtract our cookies from the price.
-  if (cookieCount >= grandmaPriceAmount) {
-    // Subtract cookies from the price of the item.
-    cookieCount +=  - grandmaPriceAmount;
-    refreshCookieCount()
+if (buyGrandma) {
+  buyGrandma.addEventListener("click", function() {
+    // Make sure we have enough cookies and subtract our cookies from the price.
+    if (cookieCount >= grandmaPriceAmount) {
+      // Subtract cookies from the price of the item.
+      cookieCount +=  - grandmaPriceAmount;
+      refreshCookieCount()
 
-    // Upgrade power level.
-    grandmaLevelNumber += 1;
+      // Upgrade power level.
+      grandmaLevelNumber += 1;
 
-    // Update price.
-    grandmaPriceAmount = Math.floor(grandmaPriceAmount * 1.33);
+      // Update price.
+      grandmaPriceAmount = Math.floor(grandmaPriceAmount * 1.33);
 
-    // Update grandma power.
-    grandmaPower += 10;
+      // Update grandma power.
+      grandmaPower += 10;
 
-    // Turn autoGrandma on!.
+      // Turn autoGrandma on!.
+      autoGrandma = true;
+      autoGrandmaStart();
 
-    // Refresh shop item.
-    refreshGrandma();
-  }
-})
+      // Refresh shop item.
+      refreshGrandma();
+    }
+  })
+}
+let autoGrandmaStart = function() {
+  let grandmaInt = window.setInterval(function() {
+    cookieCount += grandmaPower;
+    refreshCookieCount();
+  }, 1000);
+}
 
 let refreshGrandma = function() {
-  grandmaLevel.innerHTML = grandmaLevelNumber
+  grandmaLevel.innerHTML = grandmaLevelNumber;
   grandmaPrice.innerHTML = grandmaPriceAmount;
-  grandmaMultiple.innerHTML = grandmaPower;
+  grandmaMultiple.innerHTML = grandmaPower - 10;
 }

@@ -5,7 +5,7 @@
 ********************************/
 
 // Declare default variables.
-let cookieCount = 500;
+let cookieCount = 10000000000;
 
 // Declare DOM variables.
 let cookieCounter = document.getElementById('cookie-counter');
@@ -122,4 +122,65 @@ let refreshGrandma = function() {
   grandmaLevel.innerHTML = grandmaLevelNumber;
   grandmaPrice.innerHTML = grandmaPriceAmount;
   grandmaMultiple.innerHTML = grandmaPower - 10;
+}
+
+/********************************
+
+          Facilities
+
+********************************/
+
+// Set default values.
+let facilityAuto = false;
+let facilityPower = 2000;
+let facilityPriceAmount = 100000;
+let facilityLevelNumber = 0;
+
+// Declare DOM variables.
+let buyFacility = document.getElementById('buy-facility');
+let facilityPrice = document.getElementById('facility-price');
+let facilityLevel = document.getElementById('facility-level');
+let facilityMultiple = document.getElementById('facility-multiple');
+
+// Buy a facility
+buyFacility.addEventListener("click", function() {
+  // Set autoLoop to false.
+  facilityAuto = false;
+
+  // Make sure we have enough cookies.
+  if (cookieCount >= facilityPriceAmount) {
+    cookieCount -= facilityPriceAmount;
+    refreshCookieCount()
+
+    // Upgrade power level.
+    facilityLevelNumber += 1;
+
+    // Update price.
+    facilityPriceAmount = Math.floor(facilityPriceAmount * 1.33);
+
+    // Update facility power.
+    facilityPower += 600;
+
+    // Turn autoFacility on!
+    facilityAuto = true;
+    autoFacilityStart();
+
+    // Refresh shop item.
+    refreshFacility();
+  }
+})
+
+// Game loop.
+let autoFacilityStart = function() {
+  let facilityInt = window.setInterval(function(){
+    cookieCount += facilityPower;
+    refreshCookieCount();
+  }, 1000);
+}
+
+// Refresh shop.
+let refreshFacility = function() {
+  facilityLevel.innerHTML = facilityLevelNumber
+  facilityPrice.innerHTML = facilityPriceAmount;
+  facilityMultiple.innerHTML = facilityPower - 600;
 }

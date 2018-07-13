@@ -5,7 +5,7 @@
 ********************************/
 
 // Declare default variables.
-let cookieCount = 10000000000;
+let cookieCount = 0;
 
 // Declare DOM variables.
 let cookieCounter = document.getElementById('cookie-counter');
@@ -52,7 +52,7 @@ buyClickPower.addEventListener("click", function() {
       clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * 1.33);
 
       // Update click power.
-      clickPower += 1;
+      clickPower += 1 * Math.floor(clickPowerLevelNumber * 1.05);
 
       // Refresh shop item.
       refreshPowerClick();
@@ -100,7 +100,7 @@ if (buyGrandma) {
       grandmaPriceAmount = Math.floor(grandmaPriceAmount * 1.33);
 
       // Update grandma power.
-      grandmaPower += 10;
+      grandmaPower += 10 + Math.floor(grandmaLevelNumber * 1.33);
 
       // Turn autoGrandma on!.
       autoGrandma = true;
@@ -159,7 +159,7 @@ buyFacility.addEventListener("click", function() {
     facilityPriceAmount = Math.floor(facilityPriceAmount * 1.33);
 
     // Update facility power.
-    facilityPower += 600;
+    facilityPower += 600 + Math.floor(facilityLevelNumber * 1.33);
 
     // Turn autoFacility on!
     facilityAuto = true;
